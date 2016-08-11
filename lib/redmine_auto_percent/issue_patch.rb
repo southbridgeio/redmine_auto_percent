@@ -16,7 +16,7 @@ module RedmineAutoPercent
 
   module InstanceMethods
     def update_percent
-      self.done_ratio = 100 if self.status.is_closed?
+      self.done_ratio = 100 if self.status&.is_closed?
     end
   end
 end

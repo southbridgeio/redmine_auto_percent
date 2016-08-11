@@ -13,7 +13,7 @@ Redmine::Plugin.register :redmine_auto_percent do
   name 'Redmine Auto Done 100%'
   author 'Wade Womersley'
   description 'Automatically sets 100% done on Resolved or Closed'
-  version '0.0.1'
+  version '0.0.2'
   url ''
   author_url 'http://www.xcitestudios.com/'
 end
