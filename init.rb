@@ -1,6 +1,7 @@
 require 'redmine'
 
-ActionDispatch::Callbacks.to_prepare do
+reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
+reloader.to_prepare do
   require_dependency 'issue'
   # Guards against including the module multiple time (like in tests)
   # and registering multiple callbacks
