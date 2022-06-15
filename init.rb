@@ -1,7 +1,13 @@
 require 'redmine'
 
-reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
-reloader.to_prepare do
+register_after_redmine_initialize_proc =
+  if Redmine::VERSION::MAJOR >= 5
+    Rails.application.config.public_method(:after_initialize)
+  else
+    reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
+    reloader.public_method(:to_prepare)
+  end
+register_after_redmine_initialize_proc.call do
   require_dependency 'issue'
   # Guards against including the module multiple time (like in tests)
   # and registering multiple callbacks
